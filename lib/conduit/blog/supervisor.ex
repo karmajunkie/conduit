@@ -9,6 +9,7 @@ defmodule Conduit.Blog.Supervisor do
 
   def init(_arg) do
     Supervisor.init([
+      Blog.Workflows.Spoiler,
       Blog.Projectors.Article,
       Blog.Projectors.Tag,
       Blog.Workflows.CreateAuthorFromUser,
