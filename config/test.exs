@@ -20,7 +20,10 @@ config :eventstore, EventStore.Storage,
   password: "postgres",
   database: "conduit_eventstore_test",
   hostname: "localhost",
-  pool_size: 1
+  pool_size: 2
+
+config :commanded, event_store_adapter: Commanded.EventStore.Adapters.InMemory
+config :commanded, Commanded.EventStore.Adapters.InMemory, serializer: Commanded.Serialization.JsonSerializer
 
 # Configure the read store database
 config :conduit, Conduit.Repo,
@@ -29,6 +32,7 @@ config :conduit, Conduit.Repo,
   password: "postgres",
   database: "conduit_readstore_test",
   hostname: "localhost",
-  pool_size: 1
+  pool: Ecto.Adapters.SQL.Sandbox,
+  pool_size: 10
 
 config :comeonin, :bcrypt_log_rounds, 4
